@@ -1,0 +1,31 @@
+name: Validate 4N1F Labs Cinematic
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: JavaScript syntax
+        run: |
+          node --check editor/editor.js
+          node --check editor/addons/v1.2.3-layer-engine.js
+          node --check editor/addons/v1.2.4-align-responsive.js
+          node --check editor/addons/v1.2.5-multiselect-group.js
+      - name: Required files
+        run: |
+          test -f index.html
+          test -f editor/editor.css
+          test -f editor/editor.js
+          test -f editor/addons/v1.2.3-layer-engine.js
+          test -f editor/addons/v1.2.4-align-responsive.js
+          test -f editor/addons/v1.2.5-multiselect-group.js
+          grep -q './editor/editor.js' index.html
+          grep -q 'v1.2.5-multiselect-group.js' index.html
