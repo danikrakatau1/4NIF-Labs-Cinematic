@@ -3,8 +3,6 @@ name: Revive 4N1F Labs checkpoint
 on:
   push:
     branches: [main]
-    paths:
-      - '.github/workflows/revive-4n1f.yml'
   workflow_dispatch:
 
 permissions:
