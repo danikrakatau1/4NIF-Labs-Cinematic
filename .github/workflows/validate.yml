@@ -2,7 +2,7 @@ name: Validate 4N1F Labs Cinematic
 
 on:
   push:
-    branches: [main]
+    branches: [main, r2-dual-storage]
   workflow_dispatch:
 
 permissions:
@@ -19,6 +19,9 @@ jobs:
           node --check editor/addons/v1.2.3-layer-engine.js
           node --check editor/addons/v1.2.4-align-responsive.js
           node --check editor/addons/v1.2.5-multiselect-group.js
+          if [ -f server/r2-store.js ]; then node --check server/r2-store.js; fi
+          if [ -f server/r2-session-store.js ]; then node --check server/r2-session-store.js; fi
+          for file in api/r2-*.js; do [ -e "$file" ] && node --check "$file"; done
       - name: Required files
         run: |
           test -f index.html
@@ -29,3 +32,4 @@ jobs:
           test -f editor/addons/v1.2.5-multiselect-group.js
           grep -q './editor/editor.js' index.html
           grep -q 'v1.2.5-multiselect-group.js' index.html
+          if [ -f package.json ]; then node -e "JSON.parse(require('fs').readFileSync('package.json','utf8'))"; fi
