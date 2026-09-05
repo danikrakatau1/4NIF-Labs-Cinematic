@@ -1,0 +1,71 @@
+name: Revive 4N1F Labs checkpoint
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/revive-4n1f.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  revive:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout new standalone repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Restore historical 4N1F Labs sources
+        shell: bash
+        run: |
+          set -euo pipefail
+          BASE='https://raw.githubusercontent.com/danikrakatau1/buatundangan/37a89d585477c5002c81116ab8a5f0ab97a3db25'
+
+          mkdir -p editor/addons docs packages published scripts
+
+          curl -fsSL "$BASE/editor/index.html" -o editor/index.html
+          curl -fsSL "$BASE/editor/editor.css" -o editor/editor.css
+          curl -fsSL "$BASE/editor/editor.js" -o editor/editor.js
+          curl -fsSL "$BASE/editor/addons/v1.2.3-layer-engine.js" -o editor/addons/v1.2.3-layer-engine.js
+          curl -fsSL "$BASE/editor/addons/v1.2.4-align-responsive.js" -o editor/addons/v1.2.4-align-responsive.js
+          curl -fsSL "$BASE/editor/addons/v1.2.5-multiselect-group.js" -o editor/addons/v1.2.5-multiselect-group.js
+          curl -fsSL "$BASE/docs/4N1F-LABS-BLUEPRINT-CHECKPOINT-V1.2.4.md" -o docs/4N1F-LABS-BLUEPRINT-CHECKPOINT-V1.2.4.md
+          curl -fsSL "$BASE/packages/current.json" -o packages/current.json
+          curl -fsSL "$BASE/published/latest.json" -o published/latest.json
+          curl -fsSL "$BASE/scripts/publish.mjs" -o scripts/publish.mjs
+
+          cat > REVIVAL-CHECKPOINT.md <<'EOF'
+          # 4N1F Labs Cinematic — Revival Checkpoint
+
+          Restored from historical commit `37a89d585477c5002c81116ab8a5f0ab97a3db25`.
+
+          Restored engine pieces:
+          - Visual editor shell
+          - Direct selection / drag / scale / rotate
+          - Visual → Code and Patch JSON
+          - Layer Engine V1.2.3
+          - Align + Responsive V1.2.4
+          - Multi Select + Logical Group V1.2.5 experimental addon
+          - Package/published checkpoint metadata
+          - Historical publisher script
+
+          This repository is now the standalone home of 4N1F Labs Cinematic. Production application code from the old repository is intentionally not copied.
+          EOF
+
+      - name: Commit restored source
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name '4N1F Labs Revival Bot'
+          git config user.email 'danikrakatau1@gmail.com'
+          git add editor docs packages published scripts REVIVAL-CHECKPOINT.md
+          if git diff --cached --quiet; then
+            echo 'Checkpoint already restored.'
+            exit 0
+          fi
+          git commit -m 'Revive 4N1F Labs visual editor checkpoint'
+          git push origin HEAD:main
