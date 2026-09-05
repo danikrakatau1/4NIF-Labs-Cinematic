@@ -1,0 +1,16 @@
+{
+  "$schema": "https://raw.githubusercontent.com/cloudflare/workers-sdk/main/packages/wrangler/config-schema.json",
+  "name": "4n1f-kv-api",
+  "main": "worker/index.js",
+  "compatibility_date": "2026-09-06",
+  "workers_dev": true,
+  "kv_namespaces": [
+    {
+      "binding": "PACKAGES"
+    }
+  ],
+  "vars": {
+    "RETENTION_LIMIT": "500",
+    "ALLOWED_ORIGINS": "https://project-s9uok.vercel.app"
+  }
+}
