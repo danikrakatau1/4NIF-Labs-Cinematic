@@ -1,5 +1,6 @@
 import crypto from 'node:crypto';
-import { resolveR2Package, savePreviewSession } from '../server/r2-store.js';
+import { resolveR2Package } from '../server/r2-store.js';
+import { savePreviewSession } from '../server/r2-session-store.js';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
