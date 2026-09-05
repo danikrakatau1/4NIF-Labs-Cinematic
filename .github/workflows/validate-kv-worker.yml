@@ -1,0 +1,27 @@
+name: Validate 4N1F KV Worker
+
+on:
+  push:
+    branches: [kv-dual-storage]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Worker syntax
+        run: node --check worker/index.js
+      - name: Required Cloudflare files
+        run: |
+          test -f worker/index.js
+          test -f wrangler.jsonc
+          test -f docs/CLOUDFLARE-KV-ACTIVATION.md
+          grep -q '"name": "4n1f-kv-api"' wrangler.jsonc
+          grep -q '"binding": "PACKAGES"' wrangler.jsonc
+          grep -q 'POST /publish' docs/CLOUDFLARE-KV-ACTIVATION.md
