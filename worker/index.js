@@ -418,6 +418,12 @@ function constantTimeishEqual(a, b) {
   return diff === 0;
 }
 
+function isPublicRead(request) {
+  if (request.method.toUpperCase() !== 'GET') return false;
+  const pathname = new URL(request.url).pathname;
+  return pathname === '/health' || /^\/preview\/p_[a-f0-9]{32}$/i.test(pathname) || /^\/package\/4N1F_[A-F0-9]{12}$/i.test(pathname);
+}
+
 function corsHeaders(request, env) {
   const origin = request.headers.get('origin');
   const headers = {
@@ -426,7 +432,8 @@ function corsHeaders(request, env) {
     'access-control-max-age': '86400',
     vary: 'Origin'
   };
-  if (origin && allowedOrigins(env).has(origin)) headers['access-control-allow-origin'] = origin;
+  if (isPublicRead(request)) headers['access-control-allow-origin'] = '*';
+  else if (origin && allowedOrigins(env).has(origin)) headers['access-control-allow-origin'] = origin;
   return headers;
 }
 
