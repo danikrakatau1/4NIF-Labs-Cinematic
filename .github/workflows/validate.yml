@@ -2,7 +2,7 @@ name: Validate 4N1F Labs Cinematic
 
 on:
   push:
-    branches: [main, r2-dual-storage]
+    branches: [main, r2-dual-storage, 4n1f-sea-storm-ui]
   workflow_dispatch:
 
 permissions:
@@ -19,6 +19,8 @@ jobs:
           node --check editor/addons/v1.2.3-layer-engine.js
           node --check editor/addons/v1.2.4-align-responsive.js
           node --check editor/addons/v1.2.5-multiselect-group.js
+          if [ -f editor/background-fluid.js ]; then node --check editor/background-fluid.js; fi
+          if [ -f editor/addons/v1.3.0-r2-dual-storage.js ]; then node --check editor/addons/v1.3.0-r2-dual-storage.js; fi
           if [ -f server/r2-store.js ]; then node --check server/r2-store.js; fi
           if [ -f server/r2-session-store.js ]; then node --check server/r2-session-store.js; fi
           for file in api/r2-*.js; do [ -e "$file" ] && node --check "$file"; done
@@ -32,4 +34,10 @@ jobs:
           test -f editor/addons/v1.2.5-multiselect-group.js
           grep -q './editor/editor.js' index.html
           grep -q 'v1.2.5-multiselect-group.js' index.html
+          if [ -f editor/background-fluid.js ]; then
+            test -f editor/background-fluid.css
+            grep -q 'background-fluid.css' index.html
+            grep -q 'background-fluid.js' index.html
+            grep -q 'fluid-canvas' index.html
+          fi
           if [ -f package.json ]; then node -e "JSON.parse(require('fs').readFileSync('package.json','utf8'))"; fi
