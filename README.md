@@ -1,29 +1,52 @@
 # 4N1F Labs Cinematic
 
-Visual-first web development studio with a Figma-style editing workflow, real website source as the canvas, Visual → Code output, sandboxed Preview IDs, patches, responsive transforms, layers, smart guides, and versioned packages.
+Standalone revival of the historical 4N1F Labs visual web editor and universal live preview engine.
 
-## Core principle
+## Official home
 
-**Visual-first · code-behind · full ownership**
+- GitHub: `danikrakatau1/4NIF-Labs-Cinematic`
+- Vercel project: `undangankuuuu/anif-labs-cinematic`
+- Public host: `https://anif-labs-cinematic-undangankuuuu.vercel.app`
 
-4N1F Labs lets the user think visually — move, resize, align, group, recolor, edit text, and tune responsive layouts — while the engine preserves source code, generated patches, assets, and revision history behind the scenes.
+Legacy projects and old Vercel hosts are intentionally out of scope.
 
-## Revival baseline
+## Core model
 
-This repository revives the standalone 4N1F Labs editor from the historical checkpoint in `danikrakatau1/buatundangan`:
+4N1F Labs works on real website source, not design-only mockups:
 
-- Stable baseline: V1.2.4
-- Experimental addon retained: V1.2.5 Multi Select + Group
-- Historical checkpoint commit: `37a89d585477c5002c81116ab8a5f0ab97a3db25`
+`HTML + CSS + JS → immutable Package Key → Preview ID → live renderer`
 
-## Architecture
+One renderer deployment can serve many revisions through generated keys/sessions.
 
-`HTML/CSS/JS → immutable package KEY → Preview ID → sandboxed live renderer → visual editor → patches/code → save/publish`
+## Generated preview URL
 
-The editor and this repository are intentionally standalone. They must not depend on production application code from the historical host repository.
+When a Package Key is generated into a Preview ID, the editor opens a new page using the canonical form:
 
-## Planned cinematic direction
+`https://anif-labs-cinematic-undangankuuuu.vercel.app/p_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx`
 
-The next generation will keep the existing source-editing engine while evolving the workspace into a premium cinematic visual IDE: Layers on the left, live website canvas in the center, Inspector on the right, direct manipulation handles, smart guides, responsive scopes, animation/effects controls, history/rollback, and cloud/local project modes.
+The clean preview route resolves Cloudflare KV first and keeps the historical Supabase Preview ID resolver as a compatibility fallback.
 
-> “Figma-style” describes the interaction model only. 4N1F Labs is an independent product and is not affiliated with Figma.
+## Revived editor capabilities
+
+- selection / inspection
+- text, style, color editing
+- device modes
+- undo / redo
+- Visual → Code
+- patch JSON / cumulative patches
+- local asset drafts
+- Source Bundle JSON
+- drag / resize / rotate / nudge
+- deep selection
+- guides / measurements
+- layer navigation
+- lock / delete / restore
+- align / equal gap / reset
+- responsive scope output
+- experimental multi-select / grouping
+
+## Cinematic UI
+
+The workspace and generated-preview loading shell use a background-only WebGL fluid atmosphere with a dark scrim. No source-site navigation, forms, footer, or branding are included.
+
+See `REVIVAL-CHECKPOINT.md` and `docs/` for implementation checkpoints and storage notes.
