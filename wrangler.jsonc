@@ -12,5 +12,10 @@
   "vars": {
     "RETENTION_LIMIT": "500",
     "ALLOWED_ORIGINS": "https://project-s9uok.vercel.app"
+  },
+  "secrets": {
+    "required": [
+      "PUBLISH_TOKEN"
+    ]
   }
 }
