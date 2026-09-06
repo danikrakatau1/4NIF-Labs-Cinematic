@@ -1,0 +1,37 @@
+{
+  "$schema": "https://raw.githubusercontent.com/cloudflare/workers-sdk/main/packages/wrangler/config-schema.json",
+  "name": "4n1f-kv-api",
+  "main": "worker/index.js",
+  "compatibility_date": "2026-09-06",
+  "workers_dev": true,
+  "assets": {
+    "directory": "./",
+    "binding": "ASSETS",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "none",
+    "run_worker_first": [
+      "/health",
+      "/publish",
+      "/session",
+      "/preview/*",
+      "/package/*",
+      "/pin",
+      "/stats",
+      "/cleanup"
+    ]
+  },
+  "kv_namespaces": [
+    {
+      "binding": "PACKAGES"
+    }
+  ],
+  "vars": {
+    "RETENTION_LIMIT": "500",
+    "ALLOWED_ORIGINS": "https://project-s9uok.vercel.app,https://4n1f-kv-api.faqihanif12282000.workers.dev"
+  },
+  "secrets": {
+    "required": [
+      "PUBLISH_TOKEN"
+    ]
+  }
+}
