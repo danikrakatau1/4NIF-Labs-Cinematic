@@ -4,6 +4,12 @@
   "main": "worker/index.js",
   "compatibility_date": "2026-09-06",
   "workers_dev": true,
+  "assets": {
+    "directory": "./",
+    "binding": "ASSETS",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "none"
+  },
   "kv_namespaces": [
     {
       "binding": "PACKAGES"
@@ -11,7 +17,7 @@
   ],
   "vars": {
     "RETENTION_LIMIT": "500",
-    "ALLOWED_ORIGINS": "https://project-s9uok.vercel.app"
+    "ALLOWED_ORIGINS": "https://project-s9uok.vercel.app,https://4n1f-kv-api.faqihanif12282000.workers.dev"
   },
   "secrets": {
     "required": [
