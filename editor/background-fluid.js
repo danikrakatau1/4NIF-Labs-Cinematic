@@ -11,7 +11,7 @@
   `;
 
   const fragment = `
-    precision highp float;
+    precision mediump float;
     uniform vec2 u_resolution;
     uniform float u_time;
     uniform vec2 u_pointer;
@@ -89,7 +89,7 @@
       float centerGlow = 1.0 - smoothstep(0.05,1.05,length(p*vec2(0.78,1.0)));
       color += vec3(0.03,0.06,0.16) * centerGlow * 0.55;
 
-      float vignette = smoothstep(1.05,0.16,length(p));
+      float vignette = 1.0 - smoothstep(0.16,1.05,length(p));
       color *= 0.48 + 0.74*vignette;
       color = pow(max(color,0.0), vec3(0.88));
 
