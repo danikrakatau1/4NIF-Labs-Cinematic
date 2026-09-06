@@ -1,0 +1,7 @@
+.github/
+docs/
+worker/
+wrangler.jsonc
+README.md
+REVIVAL-CHECKPOINT.md
+.assetsignore
