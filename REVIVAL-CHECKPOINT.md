@@ -19,7 +19,14 @@ Historical source checkpoint: `danikrakatau1/buatundangan@37a89d585477c5002c8111
 
 Validation workflow passed on the revived baseline.
 
+## Official standalone home
+- GitHub source: `danikrakatau1/4NIF-Labs-Cinematic`
+- Vercel project: `undangankuuuu/anif-labs-cinematic`
+- Legacy Vercel projects and `danikrakatau1/buatundangan` are out of scope and must not be touched unless explicitly requested.
+
 ## Active direction
 The repository is now the standalone home for the next-generation 4N1F Labs Cinematic visual IDE. Interaction direction: Figma-style editing model, but operating on real website source rather than a design-only canvas.
+
+Current preview candidate: `4n1f-sea-storm-ui` for the cinematic moving background and glass workspace treatment.
 
 Next implementation target: live preview verification, then cinematic workspace/UI refinement and Preview ID/package publishing revival.
