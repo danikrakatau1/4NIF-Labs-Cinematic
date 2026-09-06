@@ -4,6 +4,7 @@ Status: **ACTIVE / official standalone engine**
 
 Official source: `danikrakatau1/4NIF-Labs-Cinematic`
 Official Vercel project: `undangankuuuu/anif-labs-cinematic`
+Official public host: `https://anif-labs-cinematic-undangankuuuu.vercel.app`
 
 Historical source checkpoint: `danikrakatau1/buatundangan@37a89d585477c5002c81116ab8a5f0ab97a3db25`
 
