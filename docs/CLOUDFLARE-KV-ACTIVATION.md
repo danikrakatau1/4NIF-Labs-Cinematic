@@ -1,6 +1,6 @@
 # 4N1F Labs Cinematic — Cloudflare KV Activation
 
-Status: prepared on branch `kv-dual-storage`.
+Status: GitHub Builds connected for branch `kv-dual-storage`; first deployment trigger issued from GitHub.
 
 ## Goal
 Keep the existing 4N1F flow while using Cloudflare Workers KV for new Cinematic packages:
